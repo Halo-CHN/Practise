@@ -69,6 +69,7 @@ class DashBoard(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
         paint.pathEffect = null
 
         //画指针
+        paint.color = Color.RED
         canvas?.drawLine(
             (width / 2).toFloat(),
             (height / 2).toFloat(),
@@ -76,6 +77,9 @@ class DashBoard(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
             (height / 2 + sin(Math.toRadians(getAngleForMark(dashMark).toDouble())) * LENGTH).toFloat(),
             paint
         )
+        paint.color = Color.BLACK
+
+        //结束
     }
 
     private fun getAngleForMark(mark: Int): Float {
