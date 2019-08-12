@@ -5,16 +5,20 @@ import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
 import com.halochn.xfermode.Utils
+import kotlin.math.cos
+import kotlin.math.sin
 
 class DashBoard(context: Context?, attrs: AttributeSet?) : View(context, attrs) {
 
     private val RADIUS = Utils.dp2px(150)
+    private val LENGTH = Utils.dp2px(100)
     private val ANGLE = 120
     private val paint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val dash = Path()
     private var path: Path
     private lateinit var dashPathEffect: PathDashPathEffect
     private lateinit var pathMeasure: PathMeasure
+    private var dashMark = 0
 
     init {
         paint.style = Paint.Style.STROKE
@@ -65,6 +69,17 @@ class DashBoard(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
         paint.pathEffect = null
 
         //画指针
+        canvas?.drawLine(
+            (width / 2).toFloat(),
+            (height / 2).toFloat(),
+            ((width / 2 + cos(Math.toRadians(getAngleForMark(dashMark).toDouble())) * LENGTH).toFloat()),
+            (height / 2 + sin(Math.toRadians(getAngleForMark(dashMark).toDouble())) * LENGTH).toFloat(),
+            paint
+        )
+    }
 
+    private fun getAngleForMark(mark: Int): Float {
+
+        return (90 + ANGLE / 2 + (360 - ANGLE) / 20 * mark).toFloat()
     }
 }
