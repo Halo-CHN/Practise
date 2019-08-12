@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-   <com.halochn.xfermode.view.DashBoard
+   <com.halochn.xfermode.view.PieChart
        android:layout_width="match_parent"
        android:layout_height="match_parent"/>
 
