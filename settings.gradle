@@ -1,2 +1,2 @@
-include ':app', ':xfermode'
+include ':app', ':xfermode', ':kaixue_kt'
 rootProject.name='HenCoderPractise'
