@@ -33,5 +33,7 @@ class ExampleUnitTest {
         val testClass=ArrayAndList()
 
         testClass.test()
+
+//        testClass.test2()
     }
 }

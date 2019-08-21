@@ -17,9 +17,7 @@ class MainActivity : AppCompatActivity() {
 
         view = findViewById(R.id.tv_HelloWorld)
 
-        if (view is TextView) {
-            (view as?TextView)?.text = "view ok !!"
-        }
+        (view as?TextView)?.text = "view ok !!"
 
         printId(view)
     }
