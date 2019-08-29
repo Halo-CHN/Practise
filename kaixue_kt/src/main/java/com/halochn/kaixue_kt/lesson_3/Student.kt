@@ -2,17 +2,21 @@ package com.halochn.kaixue_kt.lesson_3
 
 class Student constructor(var name: String, var age: Int) {
 
-    constructor(name: String = "nobody") : this(name, 0)
-    constructor(age: Int) : this("")
+    constructor(name: String) : this(name, 0)
+    constructor(age: Int) : this("", age)
     constructor() : this("")
+
+    init {
+        name = if (name == "") "Android Rookie" else name
+    }
 
     fun show() = println("Hi $name, are u ${this.age} years old ？")
 }
 
 fun main() {
-    /*val student = Student("Android Rookie")
-    student.show()*/
-    find3()
+    val student = Student("Z", 30)
+    student.show()
+    //find3()
 }
 
 fun find3() {
