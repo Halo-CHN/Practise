@@ -9,8 +9,8 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.halochn.hencoderpractise.R
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_recycler_view.*
 
 class RecyclerViewActivity : AppCompatActivity() {
@@ -72,15 +72,15 @@ class RecyclerViewActivity : AppCompatActivity() {
     }
 
     private val pics = listOf(
-        "http://p2.music.126.net/fsXjbojiD5IisEoK__NfHg==/109951163462214000.jpg?param=640y640",
-        "http://p1.music.126.net/K5tDYtuuk8wXpaIoHJ-qkg==/109951163690801396.jpg?param=640y640",
-        "http://p1.music.126.net/-PiFClzMw1DDgr9UYzieSQ==/109951164484312818.jpg?param=640y640",
-        "http://p1.music.126.net/kA2a3-Hn6uKL535ICuJw5g==/109951163080143501.jpg?param=640y640"
+        "https://p2.music.126.net/fsXjbojiD5IisEoK__NfHg==/109951163462214000.jpg?param=640y640",
+        "https://p1.music.126.net/K5tDYtuuk8wXpaIoHJ-qkg==/109951163690801396.jpg?param=640y640",
+        "https://p1.music.126.net/-PiFClzMw1DDgr9UYzieSQ==/109951164484312818.jpg?param=640y640",
+        "https://p1.music.126.net/kA2a3-Hn6uKL535ICuJw5g==/109951163080143501.jpg?param=640y640"
     )
 
     private val labels = listOf(
         "爱江山更爱美人",
-        "骂醒我",
+        "摄影师",
         "钻石星辰",
         "写给自己的"
     )
@@ -105,20 +105,23 @@ class RecyclerViewActivity : AppCompatActivity() {
         }
 
         override fun onBindViewHolder(holder: NetViewHolder, position: Int) {
-            Picasso.get().load(getPic(position)).into(holder.mPic)
+            Glide.with(holder.itemView.context)
+                .load(getPic(position))
+                .centerCrop()
+                .into(holder.mPic)
             holder.mLabel.text = getLabel(position)
         }
 
         private val pics = listOf(
-            "http://p2.music.126.net/fsXjbojiD5IisEoK__NfHg==/109951163462214000.jpg?param=640y640",
-            "http://p1.music.126.net/K5tDYtuuk8wXpaIoHJ-qkg==/109951163690801396.jpg?param=640y640",
-            "http://p1.music.126.net/-PiFClzMw1DDgr9UYzieSQ==/109951164484312818.jpg?param=640y640",
-            "http://p1.music.126.net/kA2a3-Hn6uKL535ICuJw5g==/109951163080143501.jpg?param=640y640"
+            "https://p2.music.126.net/fsXjbojiD5IisEoK__NfHg==/109951163462214000.jpg?param=640y640",
+            "https://p1.music.126.net/K5tDYtuuk8wXpaIoHJ-qkg==/109951163690801396.jpg?param=640y640",
+            "https://p1.music.126.net/-PiFClzMw1DDgr9UYzieSQ==/109951164484312818.jpg?param=640y640",
+            "https://p1.music.126.net/kA2a3-Hn6uKL535ICuJw5g==/109951163080143501.jpg?param=640y640"
         )
 
         private val labels = listOf(
             "爱江山更爱美人",
-            "骂醒我",
+            "摄影师",
             "钻石星辰",
             "写给自己的"
         )
