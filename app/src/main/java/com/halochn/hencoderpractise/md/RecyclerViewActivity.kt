@@ -1,5 +1,10 @@
 package com.halochn.hencoderpractise.md
 
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,8 +15,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.MultiTransformation
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool
+import com.bumptech.glide.load.resource.bitmap.BitmapTransformation
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.Target
 import com.halochn.hencoderpractise.R
 import kotlinx.android.synthetic.main.activity_recycler_view.*
+import java.security.MessageDigest
 
 class RecyclerViewActivity : AppCompatActivity() {
 
@@ -104,10 +119,43 @@ class RecyclerViewActivity : AppCompatActivity() {
             return 20
         }
 
+        private val multiplatform = RequestOptions().run {
+            centerCrop()
+        }
+
         override fun onBindViewHolder(holder: NetViewHolder, position: Int) {
             Glide.with(holder.itemView.context)
                 .load(getPic(position))
-                .centerCrop()
+                .transform(CenterCrop(), object : BitmapTransformation() {
+                    override fun updateDiskCacheKey(messageDigest: MessageDigest) {
+                    }
+
+                    override fun transform(
+                        pool: BitmapPool,
+                        toTransform: Bitmap,
+                        outWidth: Int,
+                        outHeight: Int
+                    ): Bitmap {
+                        val paint = Paint(Paint.ANTI_ALIAS_FLAG)
+                        paint.style = Paint.Style.FILL_AND_STROKE
+                        paint.color = Color.parseColor("#1084FF")
+                        val canvas = Canvas(toTransform)
+                        val width = toTransform.width
+                        val height = toTransform.height
+//                        canvas.drawCircle(width / 2.toFloat(), height / 2.toFloat(), 100F, paint)
+                        canvas.drawArc(
+                            0F,
+                            outHeight * 0.97F,
+                            outWidth.toFloat(),
+                            outHeight * 1.03F,
+                            180F,
+                            180F,
+                            true,
+                            paint
+                        )
+                        return toTransform
+                    }
+                })
                 .into(holder.mPic)
             holder.mLabel.text = getLabel(position)
         }
