@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">activity_prictise</string>
+    <string name="standard">Standard</string>
+    <string name="singletop">SingleTop</string>
+    <string name="singletask">SingleTask</string>
+    <string name="singleinstance">SingleInstance</string>
+    <string name="startself">StartSelf</string>
+</resources>

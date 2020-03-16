@@ -80,27 +80,30 @@ class RecyclerViewActivity : AppCompatActivity() {
         mSuspensionLabelTv.text = getLabel(mCurrentItemPosition)
     }
 
-    private val pics = listOf(
-        "https://p2.music.126.net/fsXjbojiD5IisEoK__NfHg==/109951163462214000.jpg?param=640y640",
-        "https://p1.music.126.net/K5tDYtuuk8wXpaIoHJ-qkg==/109951163690801396.jpg?param=640y640",
-        "https://p1.music.126.net/-PiFClzMw1DDgr9UYzieSQ==/109951164484312818.jpg?param=640y640",
-        "https://p1.music.126.net/kA2a3-Hn6uKL535ICuJw5g==/109951163080143501.jpg?param=640y640"
-    )
+    companion object {
+        private val pics = listOf(
+            "https://p2.music.126.net/fsXjbojiD5IisEoK__NfHg==/109951163462214000.jpg?param=640y640",
+            "https://p1.music.126.net/K5tDYtuuk8wXpaIoHJ-qkg==/109951163690801396.jpg?param=640y640",
+            "https://p1.music.126.net/-PiFClzMw1DDgr9UYzieSQ==/109951164484312818.jpg?param=640y640",
+            "https://p1.music.126.net/kA2a3-Hn6uKL535ICuJw5g==/109951163080143501.jpg?param=640y640"
+        )
 
-    private val labels = listOf(
-        "爱江山更爱美人",
-        "摄影师",
-        "钻石星辰",
-        "写给自己的"
-    )
+        private val labels = listOf(
+            "爱江山更爱美人",
+            "摄影师",
+            "钻石星辰",
+            "写给自己的"
+        )
 
-    private fun getPic(position: Int): String {
-        return pics[position % 4]
+        fun getPic(position: Int): String {
+            return pics[position % 4]
+        }
+
+        fun getLabel(position: Int): String {
+            return labels[position % 4]
+        }
     }
 
-    private fun getLabel(position: Int): String {
-        return labels[position % 4]
-    }
 
     class NetAdapter : RecyclerView.Adapter<NetAdapter.Companion.NetViewHolder>() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NetViewHolder {
@@ -153,29 +156,6 @@ class RecyclerViewActivity : AppCompatActivity() {
                 .into(holder.mPic)
             holder.mLabel.text = getLabel(position)
         }
-
-        private val pics = listOf(
-            "https://p2.music.126.net/fsXjbojiD5IisEoK__NfHg==/109951163462214000.jpg?param=640y640",
-            "https://p1.music.126.net/K5tDYtuuk8wXpaIoHJ-qkg==/109951163690801396.jpg?param=640y640",
-            "https://p1.music.126.net/-PiFClzMw1DDgr9UYzieSQ==/109951164484312818.jpg?param=640y640",
-            "https://p1.music.126.net/kA2a3-Hn6uKL535ICuJw5g==/109951163080143501.jpg?param=640y640"
-        )
-
-        private val labels = listOf(
-            "爱江山更爱美人",
-            "摄影师",
-            "钻石星辰",
-            "写给自己的"
-        )
-
-        private fun getPic(position: Int): String {
-            return pics[position % 4]
-        }
-
-        private fun getLabel(position: Int): String {
-            return labels[position % 4]
-        }
-
 
         companion object {
             class NetViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
