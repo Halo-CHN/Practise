@@ -1,3 +1,5 @@
+include ':coroutines'
+include ':okhttp'
 include ':retrofit'
 include ':motion_layout'
 include ':app', ':xfermode', ':kaixue_kt', ':text_measure', ':pattern'
