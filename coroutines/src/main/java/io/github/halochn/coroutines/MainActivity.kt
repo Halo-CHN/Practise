@@ -2,6 +2,7 @@ package io.github.halochn.coroutines
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.*
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -11,7 +12,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        doRetrofit()
     }
 
     private val retrofit = Retrofit.Builder()
@@ -21,10 +22,11 @@ class MainActivity : AppCompatActivity() {
     private val gitHubService = retrofit.create(GitHubService::class.java)
 
     private fun doRetrofit() {
-        GlobalScope.launch {
+        GlobalScope.launch(Dispatchers.Main) {
             val one = async { gitHubService.listRepos("octocat") }
             val two = async { gitHubService.listRepos("octocat") }
-            one.await()
+            val same = one.await()[0].name == two.await()[0].name
+            textView.text = "$same"
         }
     }
 
