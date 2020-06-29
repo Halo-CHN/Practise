@@ -1,3 +1,4 @@
+include ':animate_bottom_navigation'
 include ':coroutines'
 include ':okhttp'
 include ':retrofit'
