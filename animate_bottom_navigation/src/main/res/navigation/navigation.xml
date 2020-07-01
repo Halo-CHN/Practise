@@ -7,22 +7,22 @@
 
     <fragment
         android:id="@+id/messageFragment"
-        android:name="com.xin.usedcar.animate_bottom_navigation.MessageFragment"
+        android:name="io.github.halochn.animate_bottom_navigation.MessageFragment"
         android:label="@string/message_icon_title"
         tools:layout="@layout/fragment_message" />
     <fragment
         android:id="@+id/contactFragment"
-        android:name="com.xin.usedcar.animate_bottom_navigation.ContactFragment"
+        android:name="io.github.halochn.animate_bottom_navigation.ContactFragment"
         android:label="@string/contact_icon_title"
         tools:layout="@layout/fragment_contact" />
     <fragment
         android:id="@+id/exploreFragment"
-        android:name="com.xin.usedcar.animate_bottom_navigation.ExploreFragment"
+        android:name="io.github.halochn.animate_bottom_navigation.ExploreFragment"
         android:label="@string/explore_icon_title"
         tools:layout="@layout/fragment_explore" />
     <fragment
         android:id="@+id/accountFragment"
-        android:name="com.xin.usedcar.animate_bottom_navigation.AccountFragment"
+        android:name="io.github.halochn.animate_bottom_navigation.AccountFragment"
         android:label="@string/account_icon_title"
         tools:layout="@layout/fragment_account" />
 </navigation>

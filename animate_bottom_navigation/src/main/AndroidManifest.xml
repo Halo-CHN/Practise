@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.xin.usedcar.animate_bottom_navigation">
+    package="io.github.halochn.animate_bottom_navigation">
 
     <application
         android:allowBackup="true"

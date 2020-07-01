@@ -7,7 +7,7 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "com.xin.usedcar.animate_bottom_navigation"
+        applicationId "io.github.halochn.animate_bottom_navigation"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
