@@ -1,9 +1,6 @@
 package io.github.halochn.algorithm.array
 
-import java.lang.IndexOutOfBoundsException
-import java.util.*
-
-class HaloMutableList<E> : MutableList<E> {
+class HaloMutableList<E> : MutableList<E?> {
 
     companion object {
         private val DEFAULT_CAPACITY = 16
@@ -13,7 +10,7 @@ class HaloMutableList<E> : MutableList<E> {
 
     private var _size = 0
 
-    private var elements: Array<E>
+    private var elements: Array<E?>
 
     override val size: Int
         get() = _size
@@ -23,7 +20,7 @@ class HaloMutableList<E> : MutableList<E> {
     @Suppress("UNCHECKED_CAST")
     constructor(capacity: Int) {
         this.capacity = capacity
-        elements = arrayOfNulls<Any>(capacity) as Array<E>
+        elements = arrayOfNulls<Any>(capacity) as Array<E?>
     }
 
     constructor(elements: Collection<E>) : this(elements.size) {
@@ -32,20 +29,20 @@ class HaloMutableList<E> : MutableList<E> {
         }
     }
 
-    override fun contains(element: E): Boolean {
+    override fun contains(element: E?): Boolean {
         return indexOf(element) >= 0
     }
 
-    override fun containsAll(elements: Collection<E>): Boolean {
+    override fun containsAll(elements: Collection<E?>): Boolean {
         TODO("Not yet implemented")
     }
 
-    override fun get(index: Int): E {
+    override fun get(index: Int): E? {
         checkIndexRange(index)
         return elements[index]
     }
 
-    override fun indexOf(element: E): Int {
+    override fun indexOf(element: E?): Int {
         for (i in elements.indices) {
             if (elements[i] == element) return i
         }
@@ -56,11 +53,11 @@ class HaloMutableList<E> : MutableList<E> {
         return size == 0
     }
 
-    override fun iterator(): MutableIterator<E> {
+    override fun iterator(): MutableIterator<E?> {
         TODO("Not yet implemented")
     }
 
-    override fun lastIndexOf(element: E): Int {
+    override fun lastIndexOf(element: E?): Int {
         if (isEmpty()) {
             return -1
         }
@@ -72,28 +69,28 @@ class HaloMutableList<E> : MutableList<E> {
         return -1
     }
 
-    override fun add(element: E): Boolean {
+    override fun add(element: E?): Boolean {
         add(size, element)
         return true
     }
 
-    override fun add(index: Int, element: E) {
+    override fun add(index: Int, element: E?) {
         checkIndexRangeForAdd(index)
         ensureCapacity(size + 1)
-        for (i in size - 1..index) {
-            if (i >= index) {
-                elements[i + 1] = elements[i]
+        for (i in size downTo index) {
+            if (i > index) {
+                elements[i] = elements[i - 1]
             }
         }
         elements[index] = element
         _size++;
     }
 
-    override fun addAll(index: Int, elements: Collection<E>): Boolean {
+    override fun addAll(index: Int, elements: Collection<E?>): Boolean {
         TODO("Not yet implemented")
     }
 
-    override fun addAll(elements: Collection<E>): Boolean {
+    override fun addAll(elements: Collection<E?>): Boolean {
         TODO("Not yet implemented")
     }
 
@@ -101,38 +98,46 @@ class HaloMutableList<E> : MutableList<E> {
         _size = 0
     }
 
-    override fun listIterator(): MutableListIterator<E> {
+    override fun listIterator(): MutableListIterator<E?> {
         TODO("Not yet implemented")
     }
 
-    override fun listIterator(index: Int): MutableListIterator<E> {
+    override fun listIterator(index: Int): MutableListIterator<E?> {
         TODO("Not yet implemented")
     }
 
-    override fun remove(element: E): Boolean {
+    override fun remove(element: E?): Boolean {
         TODO("Not yet implemented")
     }
 
-    override fun removeAll(elements: Collection<E>): Boolean {
+    override fun removeAll(elements: Collection<E?>): Boolean {
         TODO("Not yet implemented")
     }
 
-    override fun removeAt(index: Int): E {
+    override fun removeAt(index: Int): E? {
+        checkIndexRange(index)
+        val old = elements[index]
+        for (i in index until size) {
+            if (i < size - 1) {
+                elements[i] = elements[i + 1]
+            }
+        }
+        elements[--_size] = null
+        return old
+    }
+
+    override fun retainAll(elements: Collection<E?>): Boolean {
         TODO("Not yet implemented")
     }
 
-    override fun retainAll(elements: Collection<E>): Boolean {
-        TODO("Not yet implemented")
-    }
-
-    override fun set(index: Int, element: E): E {
+    override fun set(index: Int, element: E?): E? {
         checkIndexRange(index)
         val result = elements[index]
         elements[index] = element
         return result
     }
 
-    override fun subList(fromIndex: Int, toIndex: Int): MutableList<E> {
+    override fun subList(fromIndex: Int, toIndex: Int): MutableList<E?> {
         TODO("Not yet implemented")
     }
 
@@ -151,7 +156,7 @@ class HaloMutableList<E> : MutableList<E> {
     private fun ensureCapacity(capacity: Int) {
         if (capacity > elements.size) {
             val newCapacity = capacity + capacity.shr(1)
-            elements = (arrayOfNulls<Any>(newCapacity) as Array<E>).apply {
+            elements = (arrayOfNulls<Any>(newCapacity) as Array<E?>).apply {
                 System.arraycopy(elements, 0, this, 0, elements.size)
             }
         }
