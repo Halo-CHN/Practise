@@ -23,7 +23,7 @@ class HaloMutableList<E> : MutableList<E?> {
         elements = arrayOfNulls<Any>(capacity) as Array<E?>
     }
 
-    constructor(elements: Collection<E>) : this(elements.size) {
+    constructor(elements: Collection<E?>) : this(elements.size) {
         elements.forEach {
             add(it)
         }
