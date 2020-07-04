@@ -31,4 +31,7 @@ fun main(args: Array<String>) {
     println(intMutableList)
     intMutableList.removeAt(3)
     println(intMutableList)
+
+    intMutableList.clear()
+    println(intMutableList)
 }

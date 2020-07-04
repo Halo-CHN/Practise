@@ -95,6 +95,9 @@ class HaloMutableList<E> : MutableList<E?> {
     }
 
     override fun clear() {
+        for (i in 0 until size) {
+            if (elements[i] != null) elements[i] = null else break
+        }
         _size = 0
     }
 
