@@ -43,8 +43,14 @@ class HaloMutableList<E> : MutableList<E?> {
     }
 
     override fun indexOf(element: E?): Int {
-        for (i in elements.indices) {
-            if (elements[i] == element) return i
+        if (element == null) {
+            for (i in elements.indices) {
+                if (elements[i] === null) return i
+            }
+        } else {
+            for (i in elements.indices) {
+                if (element == elements[i]) return i
+            }
         }
         return -1
     }
