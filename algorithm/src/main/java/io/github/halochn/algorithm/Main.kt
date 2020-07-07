@@ -3,6 +3,12 @@ package io.github.halochn.algorithm
 import io.github.halochn.algorithm.array.HaloMutableList
 
 fun main(args: Array<String>) {
+   // testList()
+}
+
+
+
+private fun testList() {
     val intMutableList = HaloMutableList<Int>()
     intMutableList.add(1)
     intMutableList.add(2)
@@ -34,4 +40,48 @@ fun main(args: Array<String>) {
 
     intMutableList.clear()
     println(intMutableList)
+}
+
+class ListNode(var `val`: Int) {
+        var next: ListNode? = null
+     }
+
+class Solution {
+    fun isPalindrome(head: ListNode?): Boolean {
+        var size=0
+        var cur=head
+        while(cur!=null){
+            size++
+            cur=cur?.next;
+        }
+        var palindromeIndex=size/2
+        var palindromeResidue=size%2
+        palindromeIndex+=palindromeResidue
+        cur=head;
+        var prev:ListNode?=null
+        var counter=0
+        while(cur!=null){
+            if(counter<palindromeIndex){
+                var next=cur.next
+                cur.next=prev
+                prev=cur
+                cur=next
+            }else if(counter==palindromeIndex){
+                cur=if(palindromeResidue==0) cur else cur.next
+                if(cur?.`val`!=prev?.`val`){
+                    return false
+                }
+                cur=cur?.next
+                prev=prev?.next
+            }else{
+                if(cur?.`val`!=prev?.`val`){
+                    return false
+                }
+                cur=cur?.next
+                prev=prev?.next
+            }
+            counter++
+        }
+        return true
+    }
 }
