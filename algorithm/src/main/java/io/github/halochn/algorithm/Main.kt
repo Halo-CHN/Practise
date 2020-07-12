@@ -1,11 +1,21 @@
 package io.github.halochn.algorithm
 
 import io.github.halochn.algorithm.array.HaloMutableList
+import io.github.halochn.algorithm.linkedlist.SingleLinkedList
 
 fun main(args: Array<String>) {
-   // testList()
+    // testList()
+    testLinkedList()
 }
 
+fun testLinkedList() {
+    val linkedList = SingleLinkedList<Int>().apply {
+        add(1)
+        add(2)
+        add(3)
+        println(this)
+    }
+}
 
 
 private fun testList() {
@@ -43,42 +53,42 @@ private fun testList() {
 }
 
 class ListNode(var `val`: Int) {
-        var next: ListNode? = null
-     }
+    var next: ListNode? = null
+}
 
 class Solution {
     fun isPalindrome(head: ListNode?): Boolean {
-        var size=0
-        var cur=head
-        while(cur!=null){
+        var size = 0
+        var cur = head
+        while (cur != null) {
             size++
-            cur=cur?.next;
+            cur = cur?.next;
         }
-        var palindromeIndex=size/2
-        var palindromeResidue=size%2
-        palindromeIndex+=palindromeResidue
-        cur=head;
-        var prev:ListNode?=null
-        var counter=0
-        while(cur!=null){
-            if(counter<palindromeIndex){
-                var next=cur.next
-                cur.next=prev
-                prev=cur
-                cur=next
-            }else if(counter==palindromeIndex){
-                cur=if(palindromeResidue==0) cur else cur.next
-                if(cur?.`val`!=prev?.`val`){
+        var palindromeIndex = size / 2
+        var palindromeResidue = size % 2
+        palindromeIndex += palindromeResidue
+        cur = head;
+        var prev: ListNode? = null
+        var counter = 0
+        while (cur != null) {
+            if (counter < palindromeIndex) {
+                var next = cur.next
+                cur.next = prev
+                prev = cur
+                cur = next
+            } else if (counter == palindromeIndex) {
+                cur = if (palindromeResidue == 0) cur else cur.next
+                if (cur?.`val` != prev?.`val`) {
                     return false
                 }
-                cur=cur?.next
-                prev=prev?.next
-            }else{
-                if(cur?.`val`!=prev?.`val`){
+                cur = cur?.next
+                prev = prev?.next
+            } else {
+                if (cur?.`val` != prev?.`val`) {
                     return false
                 }
-                cur=cur?.next
-                prev=prev?.next
+                cur = cur?.next
+                prev = prev?.next
             }
             counter++
         }
