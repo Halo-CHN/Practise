@@ -11,8 +11,8 @@ class Main {
             val f2 = FlyweightFactory.getInstance().getFlyweight("1")
             f2?.intrinsicState = "22"
             println(f1 === f2)
-            println("f1 intrinsicState = $f1?.intrinsicState extrinsicState = ${f1?.getExtrinsicState()}")
-            println("f2 intrinsicState = $f2?.intrinsicState extrinsicState = ${f2?.getExtrinsicState()}")
+            println("f1 intrinsicState = ${f1?.intrinsicState} extrinsicState = ${f1?.getExtrinsicState()}")
+            println("f2 intrinsicState = ${f2?.intrinsicState} extrinsicState = ${f2?.getExtrinsicState()}")
             println(f2?.intrinsicState)
             val f3 = FlyweightFactory.getInstance().getFlyweight("2")
             val f4 = FlyweightFactory.getInstance().getFlyweight("2")

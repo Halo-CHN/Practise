@@ -1,3 +1,4 @@
+include ':leetcode'
 include ':algorithm'
 include ':vector_lottie'
 include ':animate_bottom_navigation'
