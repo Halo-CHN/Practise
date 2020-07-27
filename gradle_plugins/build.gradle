@@ -23,21 +23,69 @@ android {
     }
 
     buildTypes {
+        debug {
+
+        }
+
+        internal {
+            initWith debug
+        }
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    flavorDimensions('charge')
+    productFlavors {
+        free {
+            dimension('charge')
+        }
+
+        paid {
+            dimension('charge')
+        }
+    }
 }
+
+task myClean {
+    doLast {
+        println 'myClean doLast'
+    }
+    doFirst {
+        println 'myClean doFirst'
+    }
+}
+
+task myCleanExtension(dependsOn: myClean) {
+    println 'myCleanExtension'
+    doFirst {
+        println 'myCleanExtension doFirst'
+    }
+    doLast {
+        println 'myCleanExtension doLast'
+    }
+}
+
+gradle.taskGraph.whenReady(new Action<TaskExecutionGraph>() {
+
+    @Override
+    void execute(TaskExecutionGraph taskExecutionGraph) {
+        taskExecutionGraph.getAllTasks().each {
+            println "${it.name} : ${it.class.name} _DD"
+        }
+    }
+})
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.3.0'
+    implementation 'androidx.core:core-ktx:1.3.1'
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-
+    compileOnly 'com.android.tools.build:gradle:4.0.1'
 }
