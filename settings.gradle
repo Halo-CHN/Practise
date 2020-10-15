@@ -1,3 +1,4 @@
+include ':touch'
 include ':media_player'
 include ':gradle_plugins'
 include ':leetcode'
