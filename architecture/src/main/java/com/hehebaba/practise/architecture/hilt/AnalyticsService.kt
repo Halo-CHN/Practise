@@ -4,6 +4,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.android.components.ApplicationComponent
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -21,7 +22,7 @@ class AnalyticsServiceImpl @Inject constructor() : AnalyticsService {
 @InstallIn(ActivityComponent::class)
 abstract class AnalyticsModule {
 
-    @Singleton
+//    @Singleton
     @Binds
     abstract fun bindAnalyticsService(analyticsServiceImpl: AnalyticsServiceImpl): AnalyticsService
 }

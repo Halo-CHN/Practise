@@ -1,8 +1,10 @@
 package com.hehebaba.practise.architecture.hilt
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.hehebaba.practise.architecture.R
+import com.hehebaba.practise.architecture.hilt.viewmodel.ExampleViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_example.*
 import okhttp3.OkHttpClient
@@ -20,8 +22,8 @@ class ExampleActivity : AppCompatActivity() {
     @Inject
     lateinit var exampleAdapter: ExampleAdapter
 
-    @Inject
-    lateinit var analyticsModule: AnalyticsModule
+//    @Inject
+//    lateinit var analyticsModule: AnalyticsModule
 
     @Inject
     @AuthInterceptorOkHttpClient
@@ -29,6 +31,8 @@ class ExampleActivity : AppCompatActivity() {
 
     @Inject
     lateinit var githubService: GithubService
+
+    private val exampleViewModel: ExampleViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
