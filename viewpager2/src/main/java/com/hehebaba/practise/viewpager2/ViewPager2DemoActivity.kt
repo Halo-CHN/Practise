@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_viewpager2_demo.*
 
@@ -24,13 +25,18 @@ class ViewPager2DemoActivity : AppCompatActivity() {
         initData()
     }
 
-    private fun initView() {
+    override fun onResume() {
+        super.onResume()
+    }
 
+    private fun initView() {
         viewPage2DemoAdapter = ViewPage2DemoAdapter(this)
         pager.adapter = viewPage2DemoAdapter
-
+        tab_layout.tabMode =
+            if (viewPage2DemoAdapter.itemCount > 4) TabLayout.MODE_SCROLLABLE else TabLayout.MODE_FIXED
         TabLayoutMediator(tab_layout, pager) { tab, position ->
-            tab.text = (position + 1).toString()
+//            tab.text = (position + 1).toString()
+            tab.text = "${position + 1} width: ${tab_layout.width}"
         }.attach()
     }
 
@@ -62,7 +68,7 @@ class ViewPage2DemoFragment : Fragment() {
 class ViewPage2DemoAdapter(fragmentActivity: FragmentActivity) :
     FragmentStateAdapter(fragmentActivity) {
     override fun getItemCount(): Int {
-        return 10
+        return 4
     }
 
     override fun createFragment(position: Int): Fragment {

@@ -14,6 +14,7 @@
         app:tabIndicator="@drawable/indicator"
         app:tabIndicatorColor="#FF6826"
         app:tabIndicatorFullWidth="false"
+        app:tabMinWidth="94dp"
         app:tabMode="scrollable"
         app:tabRippleColor="@android:color/holo_orange_light"
         app:tabSelectedTextColor="@android:color/holo_orange_dark"
