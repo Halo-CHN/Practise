@@ -14,4 +14,8 @@ class MyHandlers {
     fun onCheckedChanged(view: View, isChecked: Boolean) {
         Toast.makeText(view.context, isChecked.toString(), Toast.LENGTH_SHORT).show()
     }
+
+    fun layoutChanged(view: View) {
+
+    }
 }
