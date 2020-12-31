@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/masterFragment">
+
+    <fragment
+        android:id="@+id/masterFragment"
+        android:name="com.hehebaba.practise.architecture.viewmodel.MasterFragment"
+        android:label="fragment_master"
+        tools:layout="@layout/fragment_master" >
+        <action
+            android:id="@+id/action_masterFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+        <action
+            android:id="@+id/action_masterFragment_to_navigation_login"
+            app:destination="@id/navigation_login" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.hehebaba.practise.architecture.viewmodel.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" />
+    <navigation android:id="@+id/navigation_login"
+        app:startDestination="@id/loginFragment">
+        <fragment
+            android:id="@+id/loginFragment"
+            android:name="com.hehebaba.practise.architecture.viewmodel.ui.login.LoginFragment"
+            android:label="fragment_login"
+            tools:layout="@layout/fragment_login" />
+        <fragment
+            android:id="@+id/loginResultFragment"
+            android:name="com.hehebaba.practise.architecture.viewmodel.ui.login.LoginResultFragment"
+            android:label="fragment_login_result"
+            tools:layout="@layout/fragment_login_result" />
+    </navigation><action android:id="@+id/action_global_navigation_login" app:destination="@id/navigation_login"/>
+</navigation>

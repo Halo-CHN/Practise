@@ -37,10 +37,11 @@
             app:placeholder="@{@drawable/ic_error}" />
 
         <View
+            android:id="@+id/mOnLayoutChangeView"
             android:layout_width="0dp"
             android:layout_height="200dp"
             android:background="@android:color/holo_blue_dark"
-            android:onLayoutChange="@{()->handler.layoutChanged()}"
+            android:onLayoutChange="@{(v,left,top,right,bottom,oldLeft,oldTop,oldRight,oldBottom)->handler.layoutChanged(v)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

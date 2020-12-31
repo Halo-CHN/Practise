@@ -12,19 +12,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".databinding.DataBindingAdapterActivity">
+        <activity android:name=".viewmodel.SharedViewModelActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".databinding.DataBindingActivity">
-
+        <activity android:name=".databinding.DataBindingAdapterActivity">
         </activity>
-        <activity android:name=".viewbinding.ViewBindingActivity"></activity>
+        <activity android:name=".databinding.DataBindingActivity"></activity>
+        <activity android:name=".viewbinding.ViewBindingActivity" />
         <activity android:name=".hilt.ExampleActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>

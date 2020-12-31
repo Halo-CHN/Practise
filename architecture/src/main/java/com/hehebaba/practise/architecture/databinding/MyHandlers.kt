@@ -16,6 +16,6 @@ class MyHandlers {
     }
 
     fun layoutChanged(view: View) {
-
+        println("layoutChanged ${view.id}")
     }
 }
