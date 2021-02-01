@@ -1,3 +1,4 @@
+include ':constraint_layout'
 include ':gradle_plugins'
 include ':leetcode'
 include ':algorithm'
