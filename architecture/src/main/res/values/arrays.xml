@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="banana">
+        <item quantity="zero">%d banana found.</item>
+        <item quantity="one">%d banana found.</item>
+        <item quantity="two">%d banana found.</item>
+        <item quantity="few">%d banana found.</item>
+        <item quantity="other">%d banana found.</item>
+        <item quantity="many">%d bananas found.</item>
+    </plurals>
+</resources>
