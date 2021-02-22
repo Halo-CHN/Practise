@@ -1,20 +1,22 @@
 buildscript {
-    ext.gradleBuildVersion='4.0.2'
+    ext.gradleBuildVersion='1.4.10'
+    ext.gradleVersion='4.1.0'
 }
 
 plugins {
-    id 'org.jetbrains.kotlin.jvm' version '1.4.10'
+    id 'org.jetbrains.kotlin.jvm' version "1.4.10"
     id 'java-gradle-plugin'
 }
 
 
 repositories {
+    maven{url 'http://maven.aliyun.com/nexus/content/groups/public/'}
     google()
-    jcenter()
+//    jcenter()
 
 }
 dependencies {
     compileOnly gradleApi()
-    implementation 'com.android.tools.build:gradle:4.1.0'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.10"
+    implementation "com.android.tools.build:gradle:$rootProject.gradleVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$rootProject.gradleBuildVersion"
 }
