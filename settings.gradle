@@ -1,3 +1,5 @@
+include ':mylibrary'
+include ':scalable-image-view'
 include ':constraint_layout'
 include ':viewpager2'
 include ':architecture'
