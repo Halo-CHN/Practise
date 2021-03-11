@@ -89,10 +89,12 @@ class ScalableImageView : View {
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
-        val scaleFraction = (currentScale - smallScale) / (bigScale - smallScale)
-        canvas?.translate(offsetX * scaleFraction, offsetY * scaleFraction)
-        canvas?.scale(currentScale, currentScale, width / 2F, height / 2F)
-        canvas?.drawBitmap(bitmap, originalOffsetX, originalOffsetY, paint)
+        canvas?.let {
+            val scaleFraction = (currentScale - smallScale) / (bigScale - smallScale)
+            it.translate(offsetX * scaleFraction, offsetY * scaleFraction)
+            it.scale(currentScale, currentScale, width / 2F, height / 2F)
+            it.drawBitmap(bitmap, originalOffsetX, originalOffsetY, paint)
+        }
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
