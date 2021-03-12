@@ -1,3 +1,4 @@
+include ':multi_touch'
 include ':mylibrary'
 include ':scalable-image-view'
 include ':constraint_layout'
