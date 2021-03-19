@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.util.AttributeSet
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import com.hehebaba.multi_touch.R
@@ -26,51 +27,65 @@ class MultiTouchView(context: Context?, attrs: AttributeSet?) : View(context, at
     private var originalOffsetX = 0F
     private var originalOffsetY = 0F
 
-    private var currentOffsetX = 0F
-    private var currentOffsetY = 0F
-
     init {
 
     }
 
     override fun onDraw(canvas: Canvas?) {
         canvas?.run {
-            offsetX = originalOffsetX - (downX - currentOffsetX)
-            offsetY = originalOffsetY - (downY - currentOffsetY)
+
             drawBitmap(bitmap, offsetX, offsetY, paint)
         }
     }
 
+    var availablePointerId = 0
+
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         event?.let { e ->
-            var availableIndex = 0
             when (event.actionMasked) {
                 MotionEvent.ACTION_DOWN -> {
-                    originalOffsetX = offsetX
-                    originalOffsetY = offsetY
-                    downX = e.x
-                    downY = e.y
+                    availablePointerId = e.getPointerId(0)
+                    refreshXY(e)
                     return true
                 }
                 MotionEvent.ACTION_MOVE -> {
-                    currentOffsetX = e.getX(availableIndex)
-                    currentOffsetY = e.getY(availableIndex)
+                    val availablePointerIndex = e.findPointerIndex(availablePointerId)
+                    offsetX = originalOffsetX - (downX - e.getX(availablePointerIndex))
+                    offsetY = originalOffsetY - (downY - e.getY(availablePointerIndex))
                     invalidate()
                 }
                 MotionEvent.ACTION_POINTER_DOWN -> {
-                    val actionIndex = e.actionIndex
-                    availableIndex = actionIndex
+                    Log.d("ACTION_POINTER_DOWN", "e.actionIndex: ${e.actionIndex}")
+                    availablePointerId = e.getPointerId(e.actionIndex)
+                    refreshXY(e)
                 }
                 MotionEvent.ACTION_POINTER_UP -> {
-                    val actionIndex = e.actionIndex
-                    originalOffsetX = offsetX
-                    originalOffsetY = offsetY
+                    Log.d("ACTION_POINTER_UP", "e.actionIndex: ${e.actionIndex}")
+                    if (availablePointerId == e.getPointerId(e.actionIndex)) {
+                        availablePointerId = if (e.actionIndex == e.pointerCount - 1) {
+                            e.getPointerId(e.pointerCount - 2)
+                        } else {
+                            e.getPointerId(e.pointerCount - 1)
+                        }
+                        refreshXY(e)
+                    }
                 }
                 MotionEvent.ACTION_UP -> {
+
+                }
+                else -> {
 
                 }
             }
         }
         return super.onTouchEvent(event)
+    }
+
+    private fun refreshXY(e: MotionEvent) {
+        originalOffsetX = offsetX
+        originalOffsetY = offsetY
+        val availablePointerIndex = e.findPointerIndex(availablePointerId)
+        downX = e.getX(availablePointerIndex)
+        downY = e.getY(availablePointerIndex)
     }
 }
