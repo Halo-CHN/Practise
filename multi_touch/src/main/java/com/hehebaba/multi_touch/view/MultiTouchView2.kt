@@ -12,9 +12,9 @@ import com.hehebaba.multi_touch.R
 import com.hehebaba.mylibrary.utils.Utils
 
 /**
- * 接力型
+ * 合作型
  */
-class MultiTouchView(context: Context?, attrs: AttributeSet?) : View(context, attrs) {
+class MultiTouchView2(context: Context?, attrs: AttributeSet?) : View(context, attrs) {
 
     private val paint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val IMAGE_WIDTH = Utils.dp2Pixel(300F)
