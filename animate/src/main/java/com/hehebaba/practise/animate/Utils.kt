@@ -35,7 +35,7 @@ object Utils {
         }
     }
 
-    private fun getDisplay(context: Context?): Display? {
+    public fun getDisplay(context: Context?): Display? {
         val windowManager: WindowManager = if (context is Activity) {
             context.windowManager
         } else {
