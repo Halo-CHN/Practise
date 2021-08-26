@@ -16,7 +16,11 @@ class CameraRotateView(context: Context?, attrs: AttributeSet?) : View(context, 
     private var offsetX = 0f
     private var offsetY = 0f
     var cameraRotateDegree = 30f
-    var canvasRotateDegree = 30f
+    var canvasRotateDegree = 0f
+        set(value) {
+            field = value
+            invalidate()
+        }
     var rectF = RectF()
 
     init {
