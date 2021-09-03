@@ -3,8 +3,10 @@ package com.hehebaba.practise.animate.widget
 import android.animation.ObjectAnimator
 import android.content.Context
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Rect
+import android.graphics.drawable.ColorDrawable
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
@@ -21,6 +23,9 @@ class MaterialEditText(context: Context, attrs: AttributeSet?) :
     private val HORIZONTAL_OFFSET = Utils.dp2px(5)
     private val EXTRA_OFFSET = Utils.dp2px(16)
     private var floatingLabelShown = false
+    private val topDrawable = ColorDrawable(Color.TRANSPARENT).apply {
+        setBounds(0, 0, 1, (TEXT_SIZE + TEXT_MARGIN).toInt())
+    }
 
     private val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         textSize = TEXT_SIZE
@@ -49,19 +54,6 @@ class MaterialEditText(context: Context, attrs: AttributeSet?) :
             recycle()
         }
         refreshPadding()
-    }
-
-    private fun refreshPadding() {
-        background.getPadding(backgroundPadding)
-        setPadding(
-            backgroundPadding.left,
-            when (useFloatingLabel) {
-                true -> (backgroundPadding.top + TEXT_SIZE + TEXT_MARGIN).toInt()
-                false -> backgroundPadding.top
-            },
-            backgroundPadding.right,
-            backgroundPadding.bottom
-        )
         addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
@@ -83,13 +75,37 @@ class MaterialEditText(context: Context, attrs: AttributeSet?) :
         })
     }
 
+    private fun refreshPadding() {
+        background.getPadding(backgroundPadding)
+        setPadding(
+            backgroundPadding.left,
+            when (useFloatingLabel) {
+                true -> (backgroundPadding.top + TEXT_SIZE + TEXT_MARGIN).toInt()
+                false -> backgroundPadding.top
+            },
+            backgroundPadding.right,
+            backgroundPadding.bottom
+        )
+//        setCompoundDrawablesRelative(
+//            null,
+//            when (useFloatingLabel) {
+//                true -> topDrawable
+//                false -> null
+//            },
+//            null,
+//            null
+//        )
+    }
+
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         canvas?.run {
             if (useFloatingLabel) {
+                save()
                 paint.alpha = (0xff * floatingLabelFraction).toInt()
                 val extraOffset = -EXTRA_OFFSET * floatingLabelFraction
                 drawText(hint.toString(), HORIZONTAL_OFFSET, VERTICAL_OFFSET + extraOffset, paint)
+                restore()
             }
         }
     }
