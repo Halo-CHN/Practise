@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.hehebaba.scalable_image_view.view.ScalableImageView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.hehebaba.scalable_image_view.view.OnTouchEventViewGroup xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-</com.hehebaba.scalable_image_view.view.ScalableImageView>
+    <com.hehebaba.scalable_image_view.view.ScalableImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</com.hehebaba.scalable_image_view.view.OnTouchEventViewGroup>
