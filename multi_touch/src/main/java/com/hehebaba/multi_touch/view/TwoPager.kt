@@ -62,7 +62,7 @@ class TwoPager(context: Context?, attrs: AttributeSet?) : ViewGroup(context, att
                     downScrollX = scrollX
                 }
                 MotionEvent.ACTION_MOVE -> {
-                    val dx = downX - x + downScrollX
+                    val dx = Math.min(Math.max(0f, downX - x + downScrollX), measuredWidth * 1f)
                     scrollTo(dx.toInt(), 0)
                 }
             }
